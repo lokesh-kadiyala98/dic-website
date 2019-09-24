@@ -10,4 +10,5 @@ $(document).ready(function() {
             $('.fa-hand-holding-heart .fa-heart').first().remove();
         }, 500)
     });
+
 });

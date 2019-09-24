@@ -22,6 +22,10 @@ a:active:hover {
   vertical-align: inherit;
 }
 
+li {
+  list-style: none;
+}
+
 h1 {
   font-weight: 300;
 }
@@ -41,47 +45,33 @@ section {
   margin: 50px;
 }
 
-.directors-note-text {
-  padding: 1%;
-  font-style: italic;
-  line-height: 145%;
-  position: relative;
-}
-
-.directors-note-text:before {
-  content: "\201C";
-  font-size: 500%;
-  display: block;
-  position: absolute;
-  top: -5px;
-  left: -5px;
-}
-
 .link {
-  list-style: none;
   margin: 20px;
   text-transform: uppercase;
   font-weight: 500;
 }
 
 .nav-wrapper {
+  padding: 0;
   width: 100%;
   background-color: black;
   color: white;
   text-align: center;
 }
 
-.nav {
+.main-nav {
+  padding: 0px;
+  margin: 0px;
   display: -webkit-inline-box;
 }
 
-.nav .link a {
+.main-nav .link a {
   padding: 8px;
   border-bottom: 2px solid transparent;
   transition: border-bottom 0.2s;
 }
 
-.nav .link a:hover {
+.main-nav .link a:hover {
   border-bottom: 2px solid #3498db;
 }
 
@@ -147,6 +137,27 @@ section {
 
 .directors-note {
   font-size: 120%;
+}
+
+.directors-note-img {
+  height: 100px;
+  width: 100px;
+}
+
+.directors-note-text {
+  padding: 1%;
+  font-style: italic;
+  line-height: 145%;
+  position: relative;
+}
+
+.directors-note-text:before {
+  content: "\201C";
+  font-size: 500%;
+  display: block;
+  position: absolute;
+  top: -5px;
+  left: -5px;
 }
 
 .icon-big {
@@ -227,20 +238,20 @@ section {
   );
   
   -moz-background-size: 250% 250%, 100% 100%;
-       background-size: 250% 250%, 100% 100%;
+  background-size: 250% 250%, 100% 100%;
   
   -webkit-transition: background-position 0s ease;
-     -moz-transition: background-position 0s ease;       
-       -o-transition: background-position 0s ease;
-          transition: background-position 0s ease;
+  -moz-transition: background-position 0s ease;       
+  -o-transition: background-position 0s ease;
+  transition: background-position 0s ease;
 }
 
 .shine:hover {
   background-position: 0 0, 0 0;
   
   -webkit-transition-duration: 0.5s;
-     -moz-transition-duration: 0.5s;
-          transition-duration: 0.5s;
+  -moz-transition-duration: 0.5s;
+  transition-duration: 0.5s;
 }
 
 .page-notfound {

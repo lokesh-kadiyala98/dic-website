@@ -7,7 +7,7 @@ import Home from './components/home';
 import About from './components/about';
 import EBiz from './components/misc/about/ebiz';
 import UdyogMitra from './components/misc/about/udyogMitra';
-import DeptOfIndustriesAndCommerce from './components/misc/about/deptOfIndustriesAndCommerce';
+import DOIC from './components/misc/about/deptOfIndustriesAndCommerce';
 import Contact from './components/contact';
 import Services from './components/services';
 import NotFound from './components/notFound';
@@ -22,7 +22,7 @@ class App extends Component {
           <Route path="/about" component={About} />
           <Route path="/ebiz" component={EBiz} />
           <Route path="/udyogMitra" component={UdyogMitra} />
-          <Route path="/deptOfIndustriesAndCommerce" component={DeptOfIndustriesAndCommerce} />
+          <Route path="/deptOfIndustriesAndCommerce" component={DOIC} />
           <Route path="/contact" component={Contact} />
           <Route path="/services" component={Services} />
           <Route path="/not-found" component={NotFound} />

@@ -1,22 +1,13 @@
-/* @media only screen and (max-width: 800px) {
-
-    .mobile-nav {
-        display: inline;
-        position: fixed;
-        top: 2%;
-        right: 5%;
-        z-index: 2;
-        color: white;
-        font-size: 200%;
-    }
-
-} */
-
 /* Small phones to small tablets: from 481px to 767px */
 @media only screen and (max-width: 767px) {
     .link {
         padding: 10px;
         margin: 0px;
+    }
+
+    .directors-note-img {
+        display: block;
+        margin: 0 auto;
     }
 
     .main-nav {

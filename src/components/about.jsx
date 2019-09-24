@@ -11,13 +11,13 @@ const About = () => {
                 <Breadcrumb.Item active>About</Breadcrumb.Item>
             </Breadcrumb>
             <Row>
-                <Col>
+                <Col sm={12} md={4} lg={3} className="mb-3">
                     <NavLink to="/ebiz" ><LinkBox body="eBiz Karnataka" /></NavLink>
                 </Col>
-                <Col>
+                <Col sm={12} md={4} lg={3} className="mb-3">
                     <NavLink to="/udyogMitra" ><LinkBox body="Karnataka Udyog Mitra" /></NavLink>
                 </Col>
-                <Col>
+                <Col sm={12} md={4} lg={3} className="mb-3">
                     <NavLink to="/deptOfIndustriesAndCommerce" ><LinkBox body="Department of Industries and Commerce" /></NavLink>
                 </Col>
             </Row>

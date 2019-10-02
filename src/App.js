@@ -10,6 +10,7 @@ import UdyogMitra from './components/misc/about/udyogMitra';
 import DOIC from './components/misc/about/deptOfIndustriesAndCommerce';
 import Contact from './components/contact';
 import Services from './components/services';
+import TraineeProfile from './components/traineeProfile';
 import NotFound from './components/notFound';
 import Footer from './components/footer';
 
@@ -25,6 +26,7 @@ class App extends Component {
           <Route path="/deptOfIndustriesAndCommerce" component={DOIC} />
           <Route path="/contact" component={Contact} />
           <Route path="/services" component={Services} />
+          <Route path="/traineeProfileForm" component={TraineeProfile} />
           <Route path="/not-found" component={NotFound} />
           <Route exact path="/" component={Home} />
           <Redirect to="not-found" />

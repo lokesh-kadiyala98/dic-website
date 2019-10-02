@@ -203,6 +203,14 @@ section {
   color: rgba(0, 0, 0, 0.95);
 }
 
+.group-form-elements {
+  border: 2px solid rgba(100, 100, 100, 0.22);
+}
+
+.btn-outline-black {
+  border: 1px solid black;
+}
+
 .shine {
   cursor: pointer;
   background-repeat: no-repeat;

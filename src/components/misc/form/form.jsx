@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import Joi from 'joi-browser';
 import Input from './input';
 import TextArea from './textArea';
+import Select from './select';
+import UploadImage from './uploadImage';
 
 class Form extends Component {
     state = { 
@@ -22,10 +24,11 @@ class Form extends Component {
         else delete errors[e.currentTarget.name];
 
         const data = {...this.state.data};
-
         data[e.currentTarget.name] = e.currentTarget.value;
+        
         //for every key pressed in input field, call setState to update the state object.
         this.setState({ data, errors });
+        
     };
     
     //called by handleChange method to validate individual fields
@@ -64,6 +67,23 @@ class Form extends Component {
         this.doSubmit();
     };
 
+    renderImageUpload(name, kannadaLabel, label, type='file', className='custom-file') {
+        const { data, errors } = this.state;
+
+        return (
+            <UploadImage
+                type={type}
+                name={name}
+                value={data[name]}
+                onChange={this.handleChange}
+                kannadaLabel={kannadaLabel}
+                label={label}
+                className={className}
+                error={errors[name]}
+            />
+        )
+    }
+
     renderInput(name, kannadaLabel, label, placeholder, type='text', className='form-group') {
         const { data, errors } = this.state;
 
@@ -77,6 +97,22 @@ class Form extends Component {
                 label={label}
                 className={className}
                 placeholder={placeholder}   
+                error={errors[name]} 
+            />
+        )
+    };
+
+    renderSelect(name, kannadaLabel, label, options) {
+        const { data, errors } = this.state;
+
+        return (
+            <Select 
+                name={name}
+                value={data[name]}
+                onChange={this.handleChange}
+                kannadaLabel={kannadaLabel}
+                options={options}
+                label={label}   
                 error={errors[name]} 
             />
         )

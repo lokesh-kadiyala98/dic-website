@@ -14,7 +14,8 @@ class TraineeProfile extends Form {
     }
 
     state = {
-        data: {  
+        data: {
+            image: '',
             name: '', 
             individualIdentityNumber: '', 
             fatherOrHusbandName: '', 
@@ -41,6 +42,7 @@ class TraineeProfile extends Form {
     
     //schema is an object used by the Joi library to validate input 
     schema = {
+        image: Joi.string().allow('').label('Image'),
         name: Joi.string().allow('').label('Name'),
         individualIdentityNumber: Joi.number().allow('').label('Individual Identity Number'),
         fatherOrHusbandName: Joi.string().allow('').label('Father/ Husband Name'),
@@ -104,12 +106,27 @@ class TraineeProfile extends Form {
     };
 
     render() { 
+
+        const genderOptions = [
+            [{_id: 'male', name: 'Male'}],
+            [{_id: 'female', name: 'Female'}],
+            [{_id: 'transgender', name: 'transgender'}],
+        ]
+
+        const categoryOptions = [
+            [{_id: 'sc', name: 'SC'}],
+            [{_id: 'male', name: 'ST'}],
+            [{_id: 'minority', name: 'Minority'}],
+            [{_id: 'pwd', name: 'PWD'}],
+        ]
+
         return ( 
             <div className="container form-group mt-5" id="traineeProfile">
                 <Row className="text-center">
                     <Col><h1>ಅಭ್ಯರ್ಥಿ ವಿವರ / Trainee Profile</h1></Col>
                 </Row>
-                <form onSubmit={this.handleSubmit}>
+                <form onSubmit={this.handleSubmit} encType="multipart/form-data">
+                    {this.renderImageUpload('image', 'ಫೋಟೋ', 'Photo', 'file')}
                     {this.renderInput('name', 'ಅಭ್ಯರ್ಥಿಯ ಹೆಸರು', 'Name of the Candidate', 'Enter Name of the Candidate')}
                     {this.renderInput('individualIdentityNumber', 'ವೈಯಕ್ತಿಕ ಗುರುತಿನ ಸಂಖ್ಯೆ', 'Individual Identity Number', 'Enter Individual ID Number', 'number')}
                     {this.renderInput('fatherOrHusbandName', 'ತಂದೆ / ಗಂಡನ ಹೆಸರು', 'Father/ Husband Name', 'Enter Father/Husband Name')}
@@ -121,7 +138,8 @@ class TraineeProfile extends Form {
                     {this.renderInput('taluk', 'ತಾಲ್ಲೂಕು', 'Taluk', 'Enter Taluk')}
                     {this.renderInput('district', 'ಜಿಲ್ಲೆ', 'District', 'Enter District')}
                     <div className="group-form-elements mb-2 p-3">
-                        <p>ಸಂಪರ್ಕ ವಿವರಗಳು
+                        <p>
+                            ಸಂಪರ್ಕ ವಿವರಗಳು
                             <br/>
                             Contact Deatils
                         </p>
@@ -129,7 +147,8 @@ class TraineeProfile extends Form {
                         {this.renderInput('emailId', 'ಇಮೇಲ್ ಐಡಿ', 'Email', 'Enter Email')}
                     </div>
                     <div className="group-form-elements mb-2 p-3">
-                        <p>ಪರ್ಯಾಯ ಸಂಪರ್ಕ ವಿವರಗಳು
+                        <p>
+                            ಪರ್ಯಾಯ ಸಂಪರ್ಕ ವಿವರಗಳು
                             <br/>
                             Alternative Contact Details
                         </p>
@@ -139,8 +158,9 @@ class TraineeProfile extends Form {
                     {this.renderInput('age', 'ವಯಸ್ಸು', 'Age', 'Enter Age')}
                     {this.renderInput('educationQualification', 'ಶಿಕ್ಷಣ ಅರ್ಹತೆ', 'Education Qulaification', 'Enter Education Qualificatioin')}
                     {this.renderInput('religion', 'ಧರ್ಮ', 'Religion', 'Enter Religion')}
-                    {this.renderInput('gender', 'ಲಿಂಗ', 'Gender', 'Enter Gender')}
-                    {this.renderInput('category', 'ವರ್ಗ', '', 'Enter Category')}
+                    {/* {this.renderInput('gender', 'ಲಿಂಗ', 'Gender', 'Enter Gender')} */}
+                    {this.renderSelect('gender', 'ಲಿಂಗ', 'Gender', genderOptions)}
+                    {this.renderSelect('category', 'ವರ್ಗ', 'Category', categoryOptions)}
                     {this.renderInput('yearlyIncome', 'ವಾರ್ಷಿಕ ಆದಾಯ', 'Yearly Income Rs.', 'Enter Yearly Income in Rs', 'number')}
                     {this.renderButton('Send It!!')}
                 </form>

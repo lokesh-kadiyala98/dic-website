@@ -1,16 +1,19 @@
 import React from 'react';
 import Joi from 'joi-browser';
-// import { join } from 'path';
 import Form from './misc/form/form';
 import { Row, Col } from 'react-bootstrap';
+import axios from 'axios';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 class TraineeProfile extends Form {
     
     constructor(props) {
         super(props)
-        
-        //save initial state to clear inputs on success.
-        this.baseState = this.state     
+        //save initial state to reset inputs
+        this.baseState = this.state    
+
+        this.apiEndPoint = 'http://localhost:5000/submit_profile'
     }
 
     state = {
@@ -42,7 +45,7 @@ class TraineeProfile extends Form {
     
     //schema is an object used by the Joi library to validate input 
     schema = {
-        image: Joi.string().allow('').label('Image'),
+        image: Joi.allow('').label('Image'),
         name: Joi.string().allow('').label('Name'),
         individualIdentityNumber: Joi.number().allow('').label('Individual Identity Number'),
         fatherOrHusbandName: Joi.string().allow('').label('Father/ Husband Name'),
@@ -66,42 +69,26 @@ class TraineeProfile extends Form {
     };
     
     //server code
-    doSubmit = () => {
+    doSubmit = async () => {
+        //call the server
+        const formData =  new FormData()
+        formData.append('image', this.state.data.image)
+
+        const { image, ...stateData } = this.state.data
+
+        var esc = encodeURIComponent;
+        var query = Object.keys(stateData)
+            .map(k => esc(k) + '=' + esc(this.state.data[k]))
+            .join('&');
+
+        const response = await axios.post(this.apiEndPoint + '?' + query, formData)
+        console.log(response)
+        if(response.data.error)
+            toast.error(response.data.error)
+        else
+            toast.success('Success! Submitted')
         
-        //call the server, and redirect to another page
-        //..
-
-        console.log('SUBMITTED')
         return;
-
-        // const params = { 
-        //     email: this.state.data.email, 
-        //     name: this.state.data.name,
-        //     experience: this.state.data.experience, 
-        //     number: this.state.data.number, 
-        //     like: this.state.data.like 
-        // };
-
-        // var esc = encodeURIComponent;
-        // var query = Object.keys(params)
-        //     .map(k => esc(k) + '=' + esc(params[k]))
-        //     .join('&');
-
-        // fetch('https://pola-server-api.herokuapp.com/send_opinion?'+query)
-        //     .then(response => response.json())
-        //     .then(response => {
-        //         if(response.success){
-        //             toast.success('Thankyou!! We took a note of that.')
-        //             this.props.incrementHeartCount();
-        //             this.setState(this.baseState)
-        //         }else{
-        //             toast.error('UH! OH! Something\'s wrong. It\'s on us.')
-        //         }
-        //     })
-        //     .catch(response => {
-        //         toast.error('UH! OH! Something\'s wrong. It\'s on us not on you.')
-        //         console.log(response)
-        //     })
         
     };
 
@@ -122,11 +109,15 @@ class TraineeProfile extends Form {
 
         return ( 
             <div className="container form-group mt-5" id="traineeProfile">
+                
+                <ToastContainer autoClose={5000}/>
+                
                 <Row className="text-center">
                     <Col><h1>ಅಭ್ಯರ್ಥಿ ವಿವರ / Trainee Profile</h1></Col>
                 </Row>
+                
                 <form onSubmit={this.handleSubmit} encType="multipart/form-data">
-                    {this.renderImageUpload('image', 'ಫೋಟೋ', 'Photo', 'file')}
+                    {this.renderImageUpload('image', 'ಫೋಟೋ')}
                     {this.renderInput('name', 'ಅಭ್ಯರ್ಥಿಯ ಹೆಸರು', 'Name of the Candidate', 'Enter Name of the Candidate')}
                     {this.renderInput('individualIdentityNumber', 'ವೈಯಕ್ತಿಕ ಗುರುತಿನ ಸಂಖ್ಯೆ', 'Individual Identity Number', 'Enter Individual ID Number', 'number')}
                     {this.renderInput('fatherOrHusbandName', 'ತಂದೆ / ಗಂಡನ ಹೆಸರು', 'Father/ Husband Name', 'Enter Father/Husband Name')}

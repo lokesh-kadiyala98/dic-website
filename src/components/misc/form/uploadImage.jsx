@@ -1,13 +1,12 @@
 import React from 'react';
 
-const UploadImage = ({ type, name, kannadaLabel, label, value, onChange, error, placeholder, className }) => {
-    console.log(className)
+const UploadImage = ({ type, name, kannadaLabel, value, onChange, error, placeholder, className }) => {
+
     return ( 
         <div className={className}>
             <input
                 type={type} 
                 name={name}
-                value={value}
                 onChange={onChange}
                 placeholder={placeholder}
                 id={name}

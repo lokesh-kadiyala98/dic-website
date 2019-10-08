@@ -30,6 +30,12 @@ class Form extends Component {
         this.setState({ data, errors });
         
     };
+
+    handleFileChange = e => {
+        const data = {...this.state.data}
+        data.image = e.target.files[0]
+        this.setState({data})
+    }
     
     //called by handleChange method to validate individual fields
     validateProperty = input => {
@@ -67,17 +73,16 @@ class Form extends Component {
         this.doSubmit();
     };
 
-    renderImageUpload(name, kannadaLabel, label, type='file', className='custom-file') {
+    renderImageUpload(name, kannadaLabel, type='file', className='custom-file') {
         const { data, errors } = this.state;
 
         return (
             <UploadImage
                 type={type}
                 name={name}
-                value={data[name]}
-                onChange={this.handleChange}
+                value={data[name].name}
+                onChange={this.handleFileChange}
                 kannadaLabel={kannadaLabel}
-                label={label}
                 className={className}
                 error={errors[name]}
             />

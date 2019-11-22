@@ -12,8 +12,7 @@ class TraineeProfile extends Form {
         super(props)
         //save initial state to reset inputs
         this.baseState = this.state    
-
-        this.apiEndPoint = 'http://localhost:5000/submit_profile'
+        this.apiEndPoint = 'http://localhost:5000'
     }
 
     state = {
@@ -71,23 +70,47 @@ class TraineeProfile extends Form {
     //server code
     doSubmit = async () => {
         //call the server
-        const formData =  new FormData()
-        formData.append('image', this.state.data.image)
+        if( !this.state.data.image || ! this.state.data.name){
+            toast.error('Form Error !! API requires image and name.')
+            return;
+        }
 
-        const { image, ...stateData } = this.state.data
+        const fileData =  new FormData()
+        fileData.append('image', this.state.data.image)
 
-        var esc = encodeURIComponent;
-        var query = Object.keys(stateData)
-            .map(k => esc(k) + '=' + esc(this.state.data[k]))
-            .join('&');
+        const imageIdentifier = { imgID: Date.now() }
 
-        const response = await axios.post(this.apiEndPoint + '?' + query, formData)
-        console.log(response)
-        if(response.data.error)
-            toast.error(response.data.error)
+        const fileResponse = await axios({ 
+            method: 'post',
+            url: this.apiEndPoint + '/upload_file?imgID=' + imageIdentifier.imgID,
+            data: fileData,
+            config: {
+                headers: {
+                    'Content-Type': 'multipart/form-data' 
+                }
+            } 
+        })
+
+        var { image, ...formData } = this.state.data
+        formData = {...formData, imgID: imageIdentifier.imgID}
+
+        const formResponse = await axios({
+            method: 'post',
+            url: this.apiEndPoint + '/submit_profile',
+            data: formData,
+        })
+
+        if(fileResponse.data.error)
+            toast.error(fileResponse.data.error)
         else
-            toast.success('Success! Submitted')
-        
+            toast.success('File uploaded !!')
+
+        if(formResponse.data.error)
+            toast.error(formResponse.data.error)
+        else{
+            toast.success('Form data sent !!')
+            this.setState( this.baseState )
+        }
         return;
         
     };

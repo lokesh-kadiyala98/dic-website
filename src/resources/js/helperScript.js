@@ -1,4 +1,5 @@
-const $ = window.$;
+//const $ = window.$;
+import $ from 'jquery';
 
 $(document).ready(function() {
     $('.fa-hand-holding-heart').click(() => {

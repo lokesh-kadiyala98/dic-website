@@ -172,7 +172,6 @@ class TraineeProfile extends Form {
                     {this.renderInput('age', 'ವಯಸ್ಸು', 'Age', 'Enter Age')}
                     {this.renderInput('educationQualification', 'ಶಿಕ್ಷಣ ಅರ್ಹತೆ', 'Education Qulaification', 'Enter Education Qualificatioin')}
                     {this.renderInput('religion', 'ಧರ್ಮ', 'Religion', 'Enter Religion')}
-                    {/* {this.renderInput('gender', 'ಲಿಂಗ', 'Gender', 'Enter Gender')} */}
                     {this.renderSelect('gender', 'ಲಿಂಗ', 'Gender', genderOptions)}
                     {this.renderSelect('category', 'ವರ್ಗ', 'Category', categoryOptions)}
                     {this.renderInput('yearlyIncome', 'ವಾರ್ಷಿಕ ಆದಾಯ', 'Yearly Income Rs.', 'Enter Yearly Income in Rs', 'number')}

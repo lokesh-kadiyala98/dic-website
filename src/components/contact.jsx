@@ -22,6 +22,10 @@ const Contact = () => {
                                 <Col>Mobile:</Col>
                                 <Col><a href="tel:+91 8392242370">+91 8392242370</a></Col>
                             </Row>
+                            <Row>
+                                <Col>Email:</Col>
+                                <Col><a href="mailto:lokesh.pandu1998@gmail.com?Subject=Web%20Project" target="_top">srujan@dicballari.com</a></Col>
+                            </Row>
                         </Card.Body>
                     </Accordion.Collapse>
                 </Card>

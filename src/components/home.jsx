@@ -5,14 +5,13 @@ import DirectorsNote from './directorsNote';
 import Applauder from './misc/applauder';
 
 class Home extends Component {
-    state = {  }
     render() { 
         return (
             <div>
                 <Carousel />
                 <Aims />
                 <DirectorsNote />
-                <Applauder />
+                <Applauder onclick={this.props.onclick} applaudes={this.props.applaudes} />
             </div>
         );
     }

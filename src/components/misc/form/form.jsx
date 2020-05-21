@@ -73,7 +73,7 @@ class Form extends Component {
         this.doSubmit();
     };
 
-    renderImageUpload(name, kannadaLabel, type='file', className='custom-file') {
+    renderImageUpload(name, kannadaLabel, type='file', className='custom-file mb-3') {
         const { data, errors } = this.state;
 
         return (

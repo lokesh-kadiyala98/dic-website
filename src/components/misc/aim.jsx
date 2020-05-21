@@ -6,7 +6,9 @@ const Aim = () => {
     return ( 
         <div className="container-fluid  aim-container">
             <Row className="text-center">
-                <Col><h1>Our Aims</h1></Col>
+                <Col>
+                    <h1 className="underlined-h1">Our Aims</h1>
+                </Col>
             </Row>
             <Row>
                 <Col className="aim" lg={3}>

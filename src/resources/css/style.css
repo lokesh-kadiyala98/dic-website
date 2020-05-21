@@ -1,3 +1,20 @@
 label {
     margin-bottom: 0 !important;
 }
+
+.center {
+    width: 50%;
+    margin: auto;
+}
+
+.trainee-profile-data {
+    border-radius: 10px;
+    padding: 5px 20px;
+    border: 1px solid rgb(199, 199, 199);
+    transition: box-shadow .3s;
+}
+
+.trainee-profile-data:hover {
+    box-shadow: 0 0 11px rgba(33,33,33,.2);
+    cursor: pointer;
+}

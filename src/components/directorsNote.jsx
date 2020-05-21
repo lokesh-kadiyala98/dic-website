@@ -5,10 +5,12 @@ const DirectorsNote = () => {
     return ( 
         <section className="container">
             <Row className="text-center">
-                <Col><h1>Directors Note</h1></Col>
+                <Col>
+                    <h1 className="underlined-h1">Directors Note</h1>
+                </Col>
             </Row>
-                <div className="directors-note">
-                    <Media>
+            <div className="directors-note">
+                <Media>
                     <Row>
                         <Col xs={12} md={2}>
                             <img
@@ -25,9 +27,9 @@ const DirectorsNote = () => {
                                 </blockquote>
                             </Media.Body>
                         </Col>
-                        </Row>
-                    </Media>
-                </div>
+                    </Row>
+                </Media>
+            </div>
         </section>
     );
 }

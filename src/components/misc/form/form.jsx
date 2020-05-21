@@ -62,7 +62,7 @@ class Form extends Component {
     //called when the form is submitted
     handleSubmit = e => {
         e.preventDefault();
-
+        
         const errors = this.validate();
         //if there are errors then set the state with errors. 
         //Else set it with an empty object.
@@ -139,11 +139,20 @@ class Form extends Component {
 
     renderButton(label) {
         return (
-            <button disabled={this.validate()} type="submit" className="btn btn-outline-black form-group float-right">
+            <button disabled={this.validate()} type="submit" onClick={(e) => this.handleSubmit(e)} className="btn btn-outline-black form-group float-right">
                 {label}
             </button>
         );
     };
+
+    renderLoadingButton(label) {
+        return (
+            <button className="btn btn-outline-black form-group float-right" type="button" disabled>
+                <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                {label}
+            </button>
+        )
+    }
 }
  
 export default Form;

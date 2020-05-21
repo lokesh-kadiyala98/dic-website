@@ -4,7 +4,9 @@ import Form from './misc/form/form';
 import { Row, Col } from 'react-bootstrap';
 import axios from 'axios';
 import { toast, ToastContainer } from 'react-toastify';
+
 import 'react-toastify/dist/ReactToastify.css';
+import config from '../config.json'
 
 class TraineeProfile extends Form {
     
@@ -12,7 +14,6 @@ class TraineeProfile extends Form {
         super(props)
         //save initial state to reset inputs
         this.baseState = this.state    
-        this.apiEndPoint = 'http://localhost:5000'
     }
 
     state = {
@@ -82,7 +83,7 @@ class TraineeProfile extends Form {
 
         const fileResponse = await axios({ 
             method: 'post',
-            url: this.apiEndPoint + '/upload_file?imgID=' + imageIdentifier.imgID,
+            url: config.apiEndpoint + '/upload_file?imgID=' + imageIdentifier.imgID,
             data: fileData,
             config: {
                 headers: {
@@ -96,7 +97,7 @@ class TraineeProfile extends Form {
 
         const formResponse = await axios({
             method: 'post',
-            url: this.apiEndPoint + '/submit_profile',
+            url: config.apiEndpoint + '/submit_profile',
             data: formData,
         })
 

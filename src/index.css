@@ -31,7 +31,7 @@ h1 {
   font-weight: 300;
 }
 
-h1:after {    
+.underlined-h1:after {    
   display: block;
   height: 2px;
   background-color: #3498db;

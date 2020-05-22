@@ -74,10 +74,15 @@ class AdminDashboard extends Component {
                 {data && data.length > 0?
                     data.map((e) => 
                         <li onClick={() => {this.setState({ showModal: true, modalId: e._id })}} className="trainee-profile-data mb-2" key={e._id}>
-                            <b>Candidate Name:</b> {e.name}<br/>
-                            <b>Address:</b> {e.address || 'NA'}<br/>
-                            <b>Mobile:</b> {e.mobile || 'NA'}<br/>
-                            <b>Email:</b> {e.emailId || 'NA'}<br/>
+                            <div className="media">
+                                <img src={e.imgURL} className="fixedsize-img" alt={e.name+"'s image"} />
+                                <div className="ml-3 media-body">
+                                    <b>Candidate Name:</b> {e.name}<br/>
+                                    <b>Address:</b> {e.address || 'NA'}<br/>
+                                    <b>Mobile:</b> {e.mobile || 'NA'}<br/>
+                                    <b>Email:</b> {e.emailId || 'NA'}<br/>
+                                </div>
+                            </div>
                         </li>
                     )
                     :

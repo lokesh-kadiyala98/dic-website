@@ -14,6 +14,9 @@ const TraineeDetails = ({ details, onclick }) => {
                         
                 <button className="close" onClick={onclick}><i className="fas fa-times"></i></button>
                 <div className="p-5">
+                    <div className="text-center mb-3">
+                        <img src={details[0].imgURL} className="bigger-fixedsize-img" alt={details[0].name+"'s image"} />
+                    </div>
                     <Table striped hover>
                         <thead>
                             <tr>

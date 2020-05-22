@@ -78,6 +78,7 @@ class TraineeProfile extends Form {
 
         const fileData =  new FormData()
         fileData.append('image', this.state.data.image)
+        var ext = this.state.data.image.name.substr(this.state.data.image.name.lastIndexOf('.') + 1);
 
         const imageIdentifier = { imgID: Date.now() }
 
@@ -98,7 +99,10 @@ class TraineeProfile extends Form {
         const formResponse = await axios({
             method: 'post',
             url: config.apiEndpoint + '/submit_profile',
-            data: formData,
+            data: { 
+                ...formData, 
+                "imgURL": "https://dic-app.s3.ap-south-1.amazonaws.com/" + imageIdentifier.imgID + ext
+            }
         })
 
         if(fileResponse.data.error)

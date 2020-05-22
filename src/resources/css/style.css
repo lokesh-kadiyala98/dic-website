@@ -18,3 +18,15 @@ label {
     box-shadow: 0 0 11px rgba(33,33,33,.2);
     cursor: pointer;
 }
+
+.fixedsize-img {
+    height: 100px;
+    width: 100px;
+    object-fit: cover;
+}
+
+.bigger-fixedsize-img {
+    height: 200px;
+    width: 200px;
+    object-fit: cover;
+}

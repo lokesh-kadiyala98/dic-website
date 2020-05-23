@@ -10,7 +10,7 @@ const UploadImage = ({ type, name, kannadaLabel, value, onChange, error, placeho
                 onChange={onChange}
                 placeholder={placeholder}
                 id={name}
-                className="custom-file-input mb-3"
+                className="custom-file-input"
             />
             <label className="custom-file-label" htmlFor={name}>{value || kannadaLabel}</label>
                 {/*Truesy Notation. If there are errors show an info box.*/}

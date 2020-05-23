@@ -17,6 +17,7 @@ class TraineeProfile extends Form {
     }
 
     state = {
+        loading: false,
         data: {
             image: '',
             name: '', 
@@ -46,7 +47,7 @@ class TraineeProfile extends Form {
     //schema is an object used by the Joi library to validate input 
     schema = {
         image: Joi.allow('').label('Image'),
-        name: Joi.string().allow('').label('Name'),
+        name: Joi.string().required().label('Name'),
         individualIdentityNumber: Joi.number().allow('').label('Individual Identity Number'),
         fatherOrHusbandName: Joi.string().allow('').label('Father/ Husband Name'),
         motherName: Joi.string().allow('').label('Mother Name'),
@@ -68,19 +69,28 @@ class TraineeProfile extends Form {
         yearlyIncome: Joi.number().allow('').label('Yearly Income')
     };
     
-    //server code
     doSubmit = async () => {
-        //call the server
+
+        this.setState({ loading: true })
+
         if( !this.state.data.image || ! this.state.data.name){
             toast.error('Form Error !! API requires image and name.')
+            this.setState({ loading: false })
             return;
         }
 
         const fileData =  new FormData()
         fileData.append('image', this.state.data.image)
-        var ext = this.state.data.image.name.substr(this.state.data.image.name.lastIndexOf('.') + 1);
-
+        var ext = this.state.data.image.name.substr(this.state.data.image.name.lastIndexOf('.'))
         const imageIdentifier = { imgID: Date.now() }
+
+        if(ext !== '.jpeg' && ext !== '.jpg' && ext !== '.png' && ext !== '.gif') {
+            var errors = {...this.state.errors}
+            errors['image'] = 'Allowed formats are JPG, JPEG, PNG, GIF'
+            toast.error(ext + " Format Given: Not allowed as image")
+            this.setState({ errors, loading: false })
+            return
+        }
 
         const fileResponse = await axios({ 
             method: 'post',
@@ -105,19 +115,16 @@ class TraineeProfile extends Form {
             }
         })
 
-        if(fileResponse.data.error)
-            toast.error(fileResponse.data.error)
-        else
-            toast.success('File uploaded !!')
-
-        if(formResponse.data.error)
-            toast.error(formResponse.data.error)
+        if(formResponse.data.error || fileResponse.data.error)
+            toast.error('Undocumented Error!! Reported to Developer')
         else{
-            toast.success('Form data sent !!')
+            toast.success('Thankyou!!')
             this.setState( this.baseState )
         }
-        return;
-        
+
+        this.setState({ loading: false })
+        return
+
     };
 
     render() { 
@@ -138,7 +145,7 @@ class TraineeProfile extends Form {
         return ( 
             <div className="container form-group mt-5" id="traineeProfile">
                 
-                <ToastContainer autoClose={5000}/>
+                <ToastContainer autoClose={6000}/>
                 
                 <Row className="text-center">
                     <Col><h1>ಅಭ್ಯರ್ಥಿ ವಿವರ / Trainee Profile</h1></Col>
@@ -180,7 +187,11 @@ class TraineeProfile extends Form {
                     {this.renderSelect('gender', 'ಲಿಂಗ', 'Gender', genderOptions)}
                     {this.renderSelect('category', 'ವರ್ಗ', 'Category', categoryOptions)}
                     {this.renderInput('yearlyIncome', 'ವಾರ್ಷಿಕ ಆದಾಯ', 'Yearly Income Rs.', 'Enter Yearly Income in Rs', 'number')}
-                    {this.renderButton('Send It!!')}
+                    {this.state.loading?
+                        this.renderLoadingButton()
+                        :
+                        this.renderButton('Send It!!')
+                    }
                 </form>
             </div>
          );

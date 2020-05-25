@@ -27,8 +27,8 @@ class Services extends Component {
 
   closeModal = () => {
     this.updateAdminCookie()
+    toast.success("Logged in as Admin")
     this.setState({ showModal: false })
-    toast.success('Logged in as Admin')
   }
 
   render() { 
@@ -42,19 +42,47 @@ class Services extends Component {
         
         <Row>
           <Col sm={12} md={4} lg={3} className="mb-3">
-            <NavLink to="/traineeProfileForm"><LinkBox body="Trainee Profile" /></NavLink>
+            <NavLink to="/traineeProfileForm">
+              <LinkBox body="Trainee Profile" />
+            </NavLink>
           </Col>
-          {this.state.admin ?
-            <Col sm={12} md={4} lg={3} className="mb-3">
-              <NavLink to="/adminDashboard">
-                <LinkBox body="Admin Dashboard" />
-              </NavLink>
-            </Col>
+          {
+            this.state.admin ?
+              <Col sm={12} md={4} lg={3} className="mb-3">
+                <NavLink to="/adminDashboard">
+                  <LinkBox body="Admin Dashboard" />
+                </NavLink>
+              </Col>
             :
-            <Col sm={12} md={4} lg={3} className="mb-3" onClick={() => {this.setState({ showModal: true })}}>
-              <LinkBox body="Admin Dashboard" />
-            </Col>
+              <Col sm={12} md={4} lg={3} className="mb-3" onClick={() => {this.setState({ showModal: true })}}>
+                <LinkBox body="Admin Dashboard" />
+              </Col>
           }
+          <Col sm={12} md={4} lg={3} className="mb-3">
+            <a href="https://dicballari.000webhostapp.com/single_window_application/">
+              <LinkBox body="Single Window Application" />
+            </a>
+          </Col>
+          <Col sm={12} md={4} lg={3} className="mb-3">
+            <a href="https://dicballari.000webhostapp.com/small_scale_industry_registration/">
+              <LinkBox body="Small Scale Industry Registration" />
+            </a>
+          </Col>
+          <Col sm={12} md={4} lg={3} className="mb-3">
+            <a href="https://dicballari.000webhostapp.com/investment_sanction/">
+              <LinkBox body="Investement Sanction" />
+            </a>
+          </Col>
+          <Col sm={12} md={4} lg={3} className="mb-3">
+            <a href="https://dicballari.000webhostapp.com/disha/">
+              <LinkBox body="DISHA" />
+            </a>
+          </Col>
+          <Col sm={12} md={4} lg={3} className="mb-3">
+            <a href="https://dicballari.000webhostapp.com/electricity_tariff/">
+              <LinkBox body="Exemption from Electricity Bill" />
+            </a>
+          </Col>
           <Col sm={12} md={4} lg={3} className="mb-3">
             <LinkBox body="PMEGP ~ Prime Minister's Employment Generation Programme" />
           </Col>

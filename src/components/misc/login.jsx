@@ -48,7 +48,7 @@ class Login extends Form {
             } else if(ex.response.status === 400 && ex.response.data) {
                 const errors = {...this.state.errors}
                 errors.username = ex.response.data.error
-                this.setState({ errors })
+                this.setState({ errors, loading: false })
             }
         }
     }
@@ -57,7 +57,6 @@ class Login extends Form {
         
         return ( 
             <div className="rounded">
-                <ToastContainer autoClose={5000} />
                 <p className="lead">Admin Login</p>
                 {this.renderInput('username', 'Username', null, 'Enter Username', )}
                 {this.renderInput('password', 'Password', null, 'Enter Password', 'password')}                

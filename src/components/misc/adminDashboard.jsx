@@ -3,6 +3,7 @@ import jwtDecode from 'jwt-decode'
 import axios from 'axios'
 import { Breadcrumb, Container } from 'react-bootstrap';
 import { toast } from 'react-toastify';
+import { Link } from 'react-router-dom';
 
 import config from '../../config.json'
 import Login from './login';
@@ -71,6 +72,7 @@ class AdminDashboard extends Component {
                 </Breadcrumb>
                 
                 <h2 className="text-center mb-5">Trainee Profile Submissions</h2>
+                <Link className="logout-btn" to="/logout"><button className="btn btn-sm btn-danger" type="button">Logout</button></Link>
                 {data && data.length > 0?
                     data.map((e) => 
                         <li onClick={() => {this.setState({ showModal: true, modalId: e._id })}} className="trainee-profile-data mb-2" key={e._id}>

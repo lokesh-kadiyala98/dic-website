@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
+import jwtDecode from 'jwt-decode'
 import axios from 'axios';
 import NavBar from './components/navbar';
 import { toast, ToastContainer } from 'react-toastify';
@@ -14,11 +15,12 @@ import Services from './components/services';
 import TraineeProfile from './components/traineeProfile';
 import NotFound from './components/notFound';
 import Footer from './components/footer';
+import AdminDashboard from './components/misc/adminDashboard';
+import Logout from './components/logout';
 import './resources/css/style.css';
 import './resources/js/helperScript';
 import './ext_resources/animate.css';
 import config from './config.json';
-import AdminDashboard from './components/misc/adminDashboard';
 
 class App extends Component {
   state = { 
@@ -26,6 +28,8 @@ class App extends Component {
   }
 
   async componentDidMount() {
+
+    this.updateAdminCookie()
     try {
       const results = await axios(config.apiEndpoint)
       if (results.status === 200) {
@@ -36,6 +40,14 @@ class App extends Component {
     }
   }
 
+  updateAdminCookie = () => {
+    try {
+      const adminToken = localStorage.getItem('admin-token')
+      const { admin } = jwtDecode(adminToken)
+      this.setState({ admin })
+    } catch(ex) { }
+  }
+
   onHeartClick = () => {
     this.setState({ applaudes: this.state.applaudes+1 })
   }
@@ -43,9 +55,10 @@ class App extends Component {
   render() {
     return(
       <div>
-        <NavBar />
+        <NavBar admin={this.state.admin} />
         <ToastContainer autoClose={5000} />
         <Switch>
+          <Route path="/logout" component={Logout} />
           <Route path="/adminDashboard" component={AdminDashboard} />
           <Route path="/about" component={About} />
           <Route path="/ebiz" component={EBiz} />

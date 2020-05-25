@@ -30,3 +30,9 @@ label {
     width: 200px;
     object-fit: cover;
 }
+
+.logout-btn {
+    position: absolute;
+    top: 20%;
+    right: 10%;
+}
